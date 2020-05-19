@@ -13,14 +13,14 @@ namespace ejemplo.Controllers
     [ApiController]
     public class ProductosController : ControllerBase
     {
-        LechesRepository repositorio;
+        ProductosRepository repositorio;
         public ProductosController()
         {
-            repositorio = new LechesRepository();
+            repositorio = new ProductosRepository();
         }
         // GET: api/Leches
         [HttpGet]
-        public ActionResult<List<Leche>> Get()
+        public ActionResult<List<Producto>> Get()
         {
             var todos = repositorio.LeerTodos();
             return todos;
@@ -28,18 +28,18 @@ namespace ejemplo.Controllers
 
         // GET: api/Leches/5
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult<Leche> Get(int id)
+        public ActionResult<Producto> Get(int id)
         {
-            var leche = repositorio.LeerPorId(id);
-            if(leche == null){
+            var producto = repositorio.LeerPorId(id);
+            if(producto == null){
                 return NotFound();
             }
-            return leche;
+            return producto;
         }
 
         // POST: api/Leches
         [HttpPost]
-        public IActionResult Post([FromBody] Leche model)
+        public IActionResult Post([FromBody] Producto model)
         {
             repositorio.Crear(model);
 
@@ -48,10 +48,10 @@ namespace ejemplo.Controllers
 
         // PUT: api/Leches/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] Leche model)
+        public IActionResult Put(int id, [FromBody] Producto model)
         {
-            var leche = repositorio.LeerPorId(model.Id);
-            if(leche == null){
+            var producto = repositorio.LeerPorId(model.Id);
+            if(producto == null){
                 return NotFound();
             }
             
@@ -63,8 +63,8 @@ namespace ejemplo.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var leche = repositorio.LeerPorId(id);
-            if(leche == null){
+            var producto = repositorio.LeerPorId(id);
+            if(producto == null){
                 return NotFound();
             }
             repositorio.Borrar(id);
