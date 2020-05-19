@@ -30,34 +30,34 @@ public class ProductosRepository {
         }
     }
 
-        internal List<Leche> LeerTodos()
+        internal List<Producto> LeerTodos()
         {
             using(var con = new SqliteConnection(DBCON)){
 
-                return con.Query<Leche>("SELECT Id, Nombre, Marca, Etapa FROM Leches ").ToList();
+                return con.Query<Producto>("SELECT Id, Nombre, Linea, Precio FROM Productos ").ToList();
             }
         }
 
-        internal Leche LeerPorId(int id)
+        internal Producto LeerPorId(int id)
         {
             using(var con = new SqliteConnection(DBCON)){
-                return con.Query<Leche>("SELECT Id, Nombre, Marca, Etapa FROM Leches WHERE Id = @Id "
+                return con.Query<Producto>("SELECT Id, Nombre, Linea, Precio FROM Productos WHERE Id = @Id "
                     , new { Id = id }).FirstOrDefault();
             }
         }
 
-        internal void Crear(Leche model)
+        internal void Crear(Producto model)
         {
             using(var con = new SqliteConnection(DBCON)){
-                con.Execute("INSERT INTO Leches ( Nombre, Marca, Etapa) VALUES ( @Nombre, @Marca, @Etapa ) "
+                con.Execute("INSERT INTO Productos (Id, Nombre, Linea, Precio) VALUES (@Id, @Nombre, @Linea, @Precio ) "
                     , model);
             }
         }
 
-        internal void Actualizar(Leche model)
+        internal void Actualizar(Producto model)
         {
              using(var con = new SqliteConnection(DBCON)){
-                 con.Execute("UPDATE Leches SET  Nombre = @Nombre , Marca = @Marca, Etapa = @Etapa WHERE Id = @Id "
+                 con.Execute("UPDATE Productos SET  Nombre = @Nombre , Linea = @Linea, Precio = @Precio WHERE Id = @Id "
                     , model);
             }
         }
@@ -65,7 +65,7 @@ public class ProductosRepository {
         internal void Borrar(int id)
         {
             using(var con = new SqliteConnection(DBCON)){
-                con.Execute("DELETE FROM Leches WHERE Id = @Id "
+                con.Execute("DELETE FROM Productos WHERE Id = @Id "
                     , new { Id = id });
             }
         }
