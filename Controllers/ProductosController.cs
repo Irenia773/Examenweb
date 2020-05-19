@@ -27,7 +27,7 @@ namespace ejemplo.Controllers
         }
 
         // GET: api/Leches/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
         public ActionResult<Producto> Get(int id)
         {
             var producto = repositorio.LeerPorId(id);
